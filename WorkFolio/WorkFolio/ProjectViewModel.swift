@@ -11,10 +11,16 @@ struct Project: Identifiable {
     var id = UUID()
     var title: String
     var desc: String
+    var meetings: [meetings] = []
 }
 
+struct meetings: Identifiable{
+    var id = UUID()
+    var title: String
+    var time: Date
+    var desc: String
+    
+}
 class ProjectViewModel: ObservableObject{
     @Published var projlist: [Project] = []
-    @Published var selected: Project? = nil
-    
 }
