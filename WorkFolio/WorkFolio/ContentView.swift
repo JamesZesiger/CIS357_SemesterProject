@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var ProjectViewModel: ProjectViewModel
     @EnvironmentObject private var AddviewModel: AddViewModel
+    @State private var selected: Int?
     @State private var showingSheet = false
     var body: some View {
         NavigationStack(){
@@ -31,9 +32,9 @@ struct ContentView: View {
                 }
                 
                 VStack{
-                    List(ProjectViewModel.projlist) {itm in
-                        NavigationLink("\(itm.title)",destination: ProjectScreen())
-                        
+                    List(ProjectViewModel.projlist.indices, id:\.self) {i in
+                        NavigationLink("\(ProjectViewModel.projlist[i].title)",destination: ProjectScreen(Selected: i))
+    
                     }
                 }
                 Spacer()

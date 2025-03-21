@@ -10,7 +10,14 @@ import SwiftUI
 struct ProjectScreen: View {
     @EnvironmentObject var ProjectModel: ProjectViewModel
     @Environment(\.dismiss) private var dismiss
+    @State var Selected: Int
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        Text("\(ProjectModel.projlist[Selected].title)")
     }
+}
+
+#Preview {
+    @Previewable @State var Selected: Int = 0
+    ProjectScreen(Selected: Selected)
+        .environmentObject(ProjectViewModel())
 }
