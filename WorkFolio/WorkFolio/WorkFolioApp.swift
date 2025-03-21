@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct WorkFolioApp: App {
+    @StateObject private var addviewModel = AddViewModel()
+    @StateObject private var ProjectviewModel = ProjectViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(ProjectviewModel)
+                .environmentObject(addviewModel)
         }
     }
 }

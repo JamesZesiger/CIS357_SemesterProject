@@ -10,6 +10,7 @@ import SwiftUI
 struct Project: Identifiable {
     var id = UUID()
     var title: String
+    var desc: String?
 }
 
 class ProjectViewModel: ObservableObject{

@@ -9,21 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var ProjectViewModel: ProjectViewModel
-    @State private var title: String = ""
+    @EnvironmentObject private var AddviewModel: AddViewModel
+    @State private var showingSheet = false
     var body: some View {
-        VStack {
-            Text("Projects")
-                .font(.title)
-            TextField("Title",text: $title)
-            Button("add"){
-                ProjectViewModel.projlist.append(Project(title: title))
-            }
-            VStack{
-                List(ProjectViewModel.projlist) {itm in
-                    Text("\(itm.title)")
+        NavigationStack(){
+            VStack {
+                HStack{
+                    Button(){
+                        showingSheet.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .sheet(isPresented: $showingSheet){
+                        AddSheet(showingSheet: $showingSheet)
+                    }
+                    Spacer()
+                    Text("Projects")
+                        .font(.title)
+                    Spacer()
+
                 }
+                
+                VStack{
+                    List(ProjectViewModel.projlist) {itm in
+                        NavigationLink("\(itm.title)",destination: ProjectScreen())
+                        
+                    }
+                }
+                Spacer()
             }
-            Spacer()
         }
         .padding()
     }
@@ -32,4 +46,5 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .environmentObject(ProjectViewModel())
+        .environmentObject(AddViewModel())
 }
