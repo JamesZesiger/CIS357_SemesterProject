@@ -32,6 +32,9 @@ struct MeetingSheet: View {
                     title = "Untitled"
                 }
                 ProjectViewModel.projlist[Selected].meetings.append(meetings(title: title, time: time, desc: Desc))
+                ProjectViewModel.projlist[Selected].meetings.sort{
+                    $0.time < $1.time
+                }
                 showingSheet = false
             }
             .font(.title)

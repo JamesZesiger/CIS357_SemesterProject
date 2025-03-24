@@ -34,11 +34,12 @@ struct ProjectScreen: View {
                 .font(.headline)
             Text("\(ProjectModel.projlist[Selected].desc)")
             Spacer()
-            if (ProjectModel.projlist[Selected].meetings != nil){
-                List(ProjectModel.projlist[Selected].meetings){ meet in
-                    Text("\(meet.title): \(meet.time)")
+            List(ProjectModel.projlist[Selected].meetings){ meet in
+                Text("\(meet.title): \(meet.time.formatted(date: .abbreviated, time: .shortened))")
                 }
-            }
+            Spacer()
+            Text("Due: \(ProjectModel.projlist[Selected].DueDate.formatted(date: .abbreviated, time: .shortened))")
+                .font(.title2)
         }
         .padding()
     }

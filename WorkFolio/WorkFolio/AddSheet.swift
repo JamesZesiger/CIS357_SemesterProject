@@ -13,6 +13,7 @@ struct AddSheet: View {
     @EnvironmentObject var ProjectViewModel: ProjectViewModel
     @State private var title: String = ""
     @State private var Desc: String = ""
+    @State private var time: Date = Date.now
     var body: some View {
         VStack{
             Text("New Project")
@@ -23,12 +24,14 @@ struct AddSheet: View {
             TextField("Description",text: $Desc)
                 .font(.title)
                 .textFieldStyle(.roundedBorder)
+            DatePicker("Due:",selection: $time)
+                .font(.title)
             Spacer()
             Button("add"){
                 if (title == ""){
                     title = "Untitled"
                 }
-                ProjectViewModel.projlist.append(Project(title: title,desc: Desc))
+                ProjectViewModel.projlist.append(Project(title: title,desc: Desc, DueDate: time))
                 showingSheet = false
             }
             .font(.title)

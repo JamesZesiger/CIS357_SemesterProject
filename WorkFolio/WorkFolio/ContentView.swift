@@ -33,7 +33,19 @@ struct ContentView: View {
                 
                 VStack{
                     List(ProjectViewModel.projlist.indices, id:\.self) {i in
-                        NavigationLink("\(ProjectViewModel.projlist[i].title)",destination: ProjectScreen(Selected: i))
+                        VStack(alignment: .leading){
+                            Text("\(ProjectViewModel.projlist[i].title)")
+                                .font(.title3)
+                            if (ProjectViewModel.projlist[i].meetings.count > 0){
+                                Text(" Next meeting:\n \(ProjectViewModel.projlist[i].meetings[0].time.formatted(date: .abbreviated, time: .shortened))")
+                            } else{
+                                Text(" No Upcoming meetings")
+                            }
+                            NavigationLink(" Due: \(ProjectViewModel.projlist[i].DueDate.formatted(date: .abbreviated, time: .omitted))",destination: ProjectScreen(Selected: i))
+                        }
+                        
+
+                        
     
                     }
                 }
@@ -42,6 +54,16 @@ struct ContentView: View {
         }
         .padding()
     }
+}
+
+extension Date {
+
+    func stripTime() -> Date {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: self)
+        let date = Calendar.current.date(from: components)
+        return date!
+    }
+
 }
 
 #Preview {

@@ -12,6 +12,7 @@ struct Project: Identifiable {
     var title: String
     var desc: String
     var meetings: [meetings] = []
+    var DueDate: Date
 }
 
 struct meetings: Identifiable{
