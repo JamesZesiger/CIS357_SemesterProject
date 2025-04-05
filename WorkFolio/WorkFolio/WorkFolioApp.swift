@@ -11,6 +11,7 @@ import SwiftUI
 struct WorkFolioApp: App {
     @StateObject private var addviewModel = AddViewModel()
     @StateObject private var ProjectviewModel = ProjectViewModel()
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     var body: some Scene {
         WindowGroup {
             ContentView()

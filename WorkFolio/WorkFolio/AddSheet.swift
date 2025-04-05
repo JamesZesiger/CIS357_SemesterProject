@@ -32,6 +32,8 @@ struct AddSheet: View {
                     title = "Untitled"
                 }
                 ProjectViewModel.projlist.append(Project(title: title,desc: Desc, DueDate: time))
+                time.addTimeInterval(15)
+                registerNotification(title: title,date: time)
                 showingSheet = false
             }
             .font(.title)
