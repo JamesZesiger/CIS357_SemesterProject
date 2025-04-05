@@ -2,7 +2,7 @@
 //  AddSheet.swift
 //  WorkFolio
 //
-//  Created by James R. Zesiger on 3/21/25.
+//  Created by James R. Zesiger and Joe Kaceli on 3/21/25.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct MeetingSheet: View {
     @EnvironmentObject private var viewModel: MeetingViewModel
     @EnvironmentObject var ProjectViewModel: ProjectViewModel
     @State private var title: String = ""
-    @State private var Desc: String = ""
+
     @State private var time = Date.now
     @State var Selected: Int
     var body: some View {
@@ -22,19 +22,19 @@ struct MeetingSheet: View {
             TextField("Title",text: $title)
                 .font(.title)
                 .textFieldStyle(.roundedBorder)
-            TextField("Description",text: $Desc)
-                .font(.title)
-                .textFieldStyle(.roundedBorder)
             DatePicker("Meeting Time:",selection: $time)
             Spacer()
             Button("add"){
                 if (title == ""){
                     title = "Untitled"
                 }
-                ProjectViewModel.projlist[Selected].meetings.append(meetings(title: title, time: time, desc: Desc))
+                
+                ProjectViewModel.projlist[Selected].meetings.append(meetings(title: title, time: time))
                 ProjectViewModel.projlist[Selected].meetings.sort{
                     $0.time < $1.time
                 }
+                time.addTimeInterval(15)
+                registerNotification(title: title, date: time)
                 showingSheet = false
             }
             .font(.title)

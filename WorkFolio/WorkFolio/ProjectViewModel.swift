@@ -2,7 +2,7 @@
 //  ProjectViewModel.swift
 //  WorkFolio
 //
-//  Created by James R. Zesiger on 3/20/25.
+//  Created by James R. Zesiger and Joe Kaceli on 3/20/25.
 //
 
 import SwiftUI
@@ -19,7 +19,6 @@ struct meetings: Identifiable{
     var id = UUID()
     var title: String
     var time: Date
-    var desc: String
     
 }
 class ProjectViewModel: ObservableObject{

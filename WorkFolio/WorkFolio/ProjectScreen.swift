@@ -2,7 +2,7 @@
 //  ProjectScreen.swift
 //  WorkFolio
 //
-//  Created by James R. Zesiger on 3/21/25.
+//  Created by James R. Zesiger and Joe Kaceli on 3/21/25.
 //
 
 import SwiftUI
@@ -16,20 +16,6 @@ struct ProjectScreen: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Spacer()
-                Text("\(ProjectModel.projlist[Selected].title)")
-                    .font(.title)
-                Spacer()
-                Button(){
-                    showingSheet.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                }
-                .sheet(isPresented: $showingSheet){
-                    MeetingSheet(showingSheet: $showingSheet,Selected: Selected)
-                }
-            }
             Text("Description:")
                 .font(.headline)
             Text("\(ProjectModel.projlist[Selected].desc)")
@@ -40,6 +26,22 @@ struct ProjectScreen: View {
             Spacer()
             Text("Due: \(ProjectModel.projlist[Selected].DueDate.formatted(date: .abbreviated, time: .shortened))")
                 .font(.title2)
+        }
+        .toolbar{
+            ToolbarItem(placement: .principal){
+                Text("\(ProjectModel.projlist[Selected].title)")
+                    .font(.title)
+            }
+            ToolbarItem(placement: .topBarTrailing){
+                Button(){
+                    showingSheet.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .sheet(isPresented: $showingSheet){
+                    MeetingSheet(showingSheet: $showingSheet,Selected: Selected)
+                }
+            }
         }
         .padding()
     }
