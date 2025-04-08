@@ -10,10 +10,9 @@ import UserNotifications
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
-    func requestNotification(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { Authorized, error in
-            if Authorized {
-                print("Notifications Allowed")
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success{
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
@@ -24,9 +23,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
-    func registerDeviceToken(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken tokenData: Data) {
-        let deviceToken = tokenData.map { String(format: "%02.2hhx", $0) }.joined()
-        print("Device token: \(deviceToken) registered")
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceID = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("DeviceID: \(deviceID)")
     }
 }
 
