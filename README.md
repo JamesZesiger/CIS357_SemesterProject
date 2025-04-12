@@ -1,2 +1,3 @@
 [Tutorial](https://jameszesiger.github.io/)\
-Presentation
+[Presentation](https://docs.google.com/presentation/d/1mw0jCQokqwva3ganL7DpU-8VWTef7YEj835ov0-gnAQ/edit?usp=sharing)\
+[Demo]
